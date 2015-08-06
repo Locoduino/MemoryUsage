@@ -71,6 +71,7 @@ uint16_t mu_StackCount(void)
 	return (uint16_t)RAMEND - (uint16_t)p;
 }
 
+// Modified function from http://www.avr-developers.com/mm/memoryusage.html
 void SRamDisplay(void)
 {
 	int	data_size	=	(int)&__data_end - (int)&__data_start;

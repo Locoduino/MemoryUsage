@@ -48,7 +48,11 @@ extern uint8_t _end;
 extern uint8_t __stack;
 extern uint8_t *__brkval;
 extern uint8_t *__data_start;
+extern uint8_t *__data_end;
 extern uint8_t *__heap_start;
+extern uint8_t *__heap_end;
+extern uint8_t *__bss_start;
+extern uint8_t *__bss_end;
 
 //
 // Memory addresses
@@ -62,6 +66,10 @@ extern uint8_t *__heap_start;
 
 #define MEMORY_PRINT_HEAPSIZE	{ Serial.print(F("Heap size:")); Serial.println((int) (__brkval == 0 ? (int)&__heap_start : (int)__brkval) - (int)&__heap_start); }
 #define MEMORY_PRINT_STACKSIZE	{ Serial.print(F("Stack size:")); Serial.println((int) RAMEND - (int)SP); }
+#define MEMORY_PRINT_FREERAM	{ Serial.print(F("Free ram:")); Serial.println((int) SP - (int) (__brkval == 0 ? (int)&__heap_start : (int)__brkval) - (int)&__heap_start); }
+#define MEMORY_PRINT_TOTALSIZE	{ Serial.print(F("SRAM size:")); Serial.println((int) RAMEND - (int) &__data_start); }
+
+void SRamDisplay(void);
 
 //
 // Stack count part. STACK_COMPUTE will get the maximum size of the stack at the moment...

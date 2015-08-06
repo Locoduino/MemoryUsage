@@ -70,3 +70,37 @@ uint16_t mu_StackCount(void)
 
 	return (uint16_t)RAMEND - (uint16_t)p;
 }
+
+void SRamDisplay(void)
+{
+	int	data_size	=	(int)&__data_end - (int)&__data_start;
+	int	bss_size	=	(int)&__bss_end - (int)&__data_end;
+	int heap_end 	= 	(int) (__brkval == 0 ? (uint8_t *) &__heap_start : __brkval);
+	//int	heap_end	=	(int)SP - (int)&__malloc_margin;
+	int	heap_size	=	heap_end - (int)&__bss_end;
+	int	stack_size	=	RAMEND - (int)SP + 1;
+	int	available	=	(RAMEND - (int)&__data_start + 1);
+	
+	available	-=	data_size + bss_size + heap_size + stack_size;
+
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_start);	Serial.println(" (__data_start)");
+	Serial.print(F("+      data      +"));			Serial.println();
+	Serial.print(F("+    variables   + size = "));	Serial.println(data_size);
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_end);		Serial.println(" (__data_end / __bss_start)");
+	Serial.print(F("+      bss       +"));			Serial.println();
+	Serial.print(F("+    variables   + size = "));	Serial.println(bss_size);
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__bss_end);		Serial.println(" (__bss_end / __heap_start)");
+	Serial.print(F("+      heap      + size = "));	Serial.println(heap_size);
+	Serial.print(F("+----------------+ "));			Serial.print((int)heap_end);		Serial.println(" (__brkval if not 0, or __heap_start)");
+	Serial.print(F("+                +"));			Serial.println();
+	Serial.print(F("+                +"));			Serial.println();
+	Serial.print(F("+   FREE RAM     + size = "));	Serial.println(available);
+	Serial.print(F("+                +"));			Serial.println();
+	Serial.print(F("+                +"));			Serial.println();
+	Serial.print(F("+----------------+ "));			Serial.print((int)SP);		Serial.println(" (SP)");
+	Serial.print(F("+     stack      + size = "));	Serial.println(stack_size);
+	Serial.print(F("+----------------+ "));			Serial.print((int)RAMEND);		Serial.println(" (RAMEND / __stack)");
+
+	Serial.println();
+	Serial.println();
+}

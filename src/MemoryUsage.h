@@ -1,5 +1,5 @@
 /*
-MemoryUsage.h - MemoryUsage library V2.0
+MemoryUsage.h - MemoryUsage library V2.10
 Copyright (c) 2015 Thierry Paris.  All right reserved.
 
 This library is free software; you can redistribute it and/or

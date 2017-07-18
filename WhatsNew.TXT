@@ -3,6 +3,11 @@ This is a library for Arduino to check your SRAM / Stack memory usage.
 
 Whats New ?
 
+19/07/2017 V2.20
+	- Ajout de la documentation doxypress.
+
+	- Adding 'Doxypress' documentation.
+
 06/08/2015 V2.10
 	- Ajout de SRamDisplay()
 

@@ -17,10 +17,15 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/*! \file MemoryUsage.cpp
+
+Main library code file.
+*/
+
 #include "Arduino.h"
 #include "MemoryUsage.h"
 
-// Thanks to adafruit : https://learn.adafruit.com/memories-of-an-arduino/measuring-free-memory
+/// Thanks to adafruit : https://learn.adafruit.com/memories-of-an-arduino/measuring-free-memory
 int mu_freeRam()
 {
 	//extern int __heap_start, *__brkval;
@@ -28,12 +33,14 @@ int mu_freeRam()
 	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
 }
 
-// Copy / adaptation of the library StackPaint available here : https://github.com/WickedDevice/StackPaint
+/// Copy / adaptation of the library StackPaint available here : https://github.com/WickedDevice/StackPaint
 
 #define STACK_CANARY	0xc5
 
 void mu_StackPaint(void) __attribute__((naked)) __attribute__((section(".init1")));
 
+
+/// Function called before any other function.
 void mu_StackPaint(void)
 {
 #if 1
@@ -61,6 +68,7 @@ void mu_StackPaint(void)
 #endif
 }
 
+/// Checks the first undecorated byte.
 uint16_t mu_StackCount(void)
 {
 	uint8_t *p = (__brkval == 0 ? (uint8_t *) &__heap_start : __brkval);
@@ -71,7 +79,7 @@ uint16_t mu_StackCount(void)
 	return (uint16_t)RAMEND - (uint16_t)p;
 }
 
-// Modified function from http://www.avr-developers.com/mm/memoryusage.html
+/// Modified function from http://www.avr-developers.com/mm/memoryusage.html
 void SRamDisplay(void)
 {
 	int	data_size	=	(int)&__data_end - (int)&__data_start;

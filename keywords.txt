@@ -10,9 +10,9 @@
 # Methods and Functions (KEYWORD2)
 #######################################
 
-mu_freeRam KEYWORD2
-mu_StackCount KEYWORD2
-SRamDisplay KEYWORD2
+mu_freeRam				KEYWORD2
+mu_StackCount			KEYWORD2
+SRamDisplay				KEYWORD2
 
 MEMORY_PRINT_START 		KEYWORD2
 MEMORY_PRINT_HEAPSTART	KEYWORD2

@@ -1,0 +1,61 @@
+Start debug 18/07/2017 20:52:40,17 
+.............................................................
+Compiling D:\Mes documents\Trusty\Arduino\Libraries\MemoryUsage\examples\FreeRam\FreeRam.ino
+Looking for library 'user32'
+Adding paths from jna.library.path: null
+Trying user32.dll
+Found library 'user32' at user32.dll
+Looking for library 'shell32'
+Adding paths from jna.library.path: null
+Trying shell32.dll
+Found library 'shell32' at shell32.dll
+Looking for library 'Ole32'
+Adding paths from jna.library.path: null
+Trying Ole32.dll
+Found library 'Ole32' at Ole32.dll
+Chargement de la configuration
+Initialisation des paquets...
+Préparation des cartes
+Ignore la bibliothèque mal nommée: La bibliothèque « MemoryUsage - Copie » ne peut être utilisée.
+Les noms de bibliothèques ne doivent contenir que des lettres et des chiffres.
+(ASCII seulement sans espace, et ne peuvent commencer par un chiffre)
+Vérification...
+D:\Mes documents\Trusty\Arduino\Libraries\MemoryUsage\examples\FreeRam\FreeRam.ino: In function 'void setup()':
+D:\Mes documents\Trusty\Arduino\Libraries\MemoryUsage\examples\FreeRam\FreeRam.ino:21:11: warning: unused variable 'p' [-Wunused-variable]
+     byte *p = new byte[3000];    
+           ^
+D:\Mes documents\Trusty\Arduino\libraries\MemoryUsage\src\MemoryUsage.cpp: In function 'uint16_t mu_StackCount()':
+D:\Mes documents\Trusty\Arduino\libraries\MemoryUsage\src\MemoryUsage.cpp:76:39: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  while (*p == STACK_CANARY && (int) p <= SP)
+                                       ^
+Archiving built core (caching) in: C:\Users\Thierry\AppData\Local\Temp\arduino_cache_716037\core\core_arduino_avr_uno_6e1523027164b4cd7a13fb34f434a07b.a
+Le croquis utilise 2478 octets (7%) de l'espace de stockage de programmes. Le maximum est de 32256 octets.
+Les variables globales utilisent 192 octets (9%) de mémoire dynamique, ce qui laisse 1856 octets pour les variables locales. Le maximum est de 2048 octets.
+.............................................................
+Compiling D:\Mes documents\Trusty\Arduino\Libraries\MemoryUsage\examples\Stack\Stack.ino
+Looking for library 'user32'
+Adding paths from jna.library.path: null
+Trying user32.dll
+Found library 'user32' at user32.dll
+Looking for library 'shell32'
+Adding paths from jna.library.path: null
+Trying shell32.dll
+Found library 'shell32' at shell32.dll
+Looking for library 'Ole32'
+Adding paths from jna.library.path: null
+Trying Ole32.dll
+Found library 'Ole32' at Ole32.dll
+Chargement de la configuration
+Initialisation des paquets...
+Préparation des cartes
+Ignore la bibliothèque mal nommée: La bibliothèque « MemoryUsage - Copie » ne peut être utilisée.
+Les noms de bibliothèques ne doivent contenir que des lettres et des chiffres.
+(ASCII seulement sans espace, et ne peuvent commencer par un chiffre)
+Vérification...
+D:\Mes documents\Trusty\Arduino\libraries\MemoryUsage\src\MemoryUsage.cpp: In function 'uint16_t mu_StackCount()':
+D:\Mes documents\Trusty\Arduino\libraries\MemoryUsage\src\MemoryUsage.cpp:76:39: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  while (*p == STACK_CANARY && (int) p <= SP)
+                                       ^
+Archiving built core (caching) in: C:\Users\Thierry\AppData\Local\Temp\arduino_cache_827007\core\core_arduino_avr_uno_6e1523027164b4cd7a13fb34f434a07b.a
+Le croquis utilise 5322 octets (16%) de l'espace de stockage de programmes. Le maximum est de 32256 octets.
+Les variables globales utilisent 286 octets (13%) de mémoire dynamique, ce qui laisse 1762 octets pour les variables locales. Le maximum est de 2048 octets.

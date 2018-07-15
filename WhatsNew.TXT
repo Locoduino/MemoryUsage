@@ -3,6 +3,13 @@ This is a library for Arduino to check your SRAM / Stack memory usage.
 
 Whats New ?
 
+15/07/2018 V2.20.1
+	- Correction du format de Keywords.txt
+	- Ajout du fichier LICENSE
+
+	- Fix Keywords.txt format.
+	- Add of LICENSE file
+
 19/07/2017 V2.20
 	- Ajout de la documentation doxypress.
 

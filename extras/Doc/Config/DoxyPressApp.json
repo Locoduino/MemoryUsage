@@ -21,7 +21,7 @@
         "extract-private": false,
         "extract-static": false,
         "file-version-filter": "",
-        "force-local-includes": false,
+        "force-local-includes": true,
         "full-path-names": true,
         "generate-bug-list": true,
         "generate-deprecate-list": true,
@@ -56,11 +56,11 @@
             ""
         ],
         "qt-auto-brief": false,
-        "repeat-brief": true,
+        "repeat-brief": false,
         "separate-member-pages": false,
         "short-names": false,
         "show-file-page": true,
-        "show-grouped-members-inc": false,
+        "show-grouped-members-inc": true,
         "show-include-files": true,
         "show-namespace-page": true,
         "show-used-files": true,
@@ -165,7 +165,7 @@
         "strip-from-path": [
             ""
         ],
-        "tab-size": 4
+        "tab-size": 2
     },
     "index": {
         "alpha-index": true,
@@ -203,7 +203,7 @@
         "image-path": [
             ""
         ],
-        "input-encoding": "UTF-8",
+        "input-encoding": "ISO-8859-1",
         "input-patterns": [
             "*.as",
             "*.c",
@@ -289,13 +289,13 @@
         "generate-eclipse": false
     },
     "output-html": {
-        "disable-index": false,
+        "disable-index": true,
         "enum-values-per-line": 4,
-        "external-links-in-window": false,
+        "external-links-in-window": true,
         "formula-fontsize": 10,
         "formula-transparent": true,
         "generate-html": true,
-        "generate-treeview": false,
+        "generate-treeview": true,
         "ghostscript": "",
         "html-colorstyle-gamma": 80,
         "html-colorstyle-hue": 18,
@@ -309,7 +309,7 @@
         "html-header": "",
         "html-index-num-entries": 100,
         "html-output": "..",
-        "html-search": false,
+        "html-search": true,
         "html-stylesheets": [
             ""
         ],
@@ -417,7 +417,7 @@
         ],
         "macro-expansion": false,
         "predefined-macros": [
-            ""
+            "DOXYGEN_SPECIFIC="
         ],
         "search-includes": true,
         "skip-function-macros": true
@@ -437,7 +437,7 @@
         "ref-by-relation": false,
         "ref-link-source": true,
         "ref-relation": false,
-        "source-code": false,
+        "source-code": true,
         "source-tooltips": true,
         "strip-code-comments": true,
         "suffix-exclude-navtree": [

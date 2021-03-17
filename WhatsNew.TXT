@@ -3,6 +3,13 @@ This is a library for Arduino to check your SRAM / Stack memory usage.
 
 Whats New ?
 
+17/03/2021 V2.21.0
+	- Correction de MEMORY_PRINT_FREERAM
+	- Limitation de la bibliothèque aux Arduino Avr.
+
+	- Fix MEMORY_PRINT_FREERAM
+	- Limit the library to AVR Arduino.
+
 15/07/2018 V2.20.1
 	- Correction du format de Keywords.txt
 	- Ajout du fichier LICENSE

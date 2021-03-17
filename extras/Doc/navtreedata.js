@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "MemoryUsage", "index.html", [
-    [ "Files", null, [
+    [ "Files", "files.html", [
       [ "File List", "files.html", [
         [ "src", "dir_d41d8cd98f00b204e9800998ecf8427e.html", [
           [ "MemoryUsage.cpp", "MemoryUsage_8cpp.html", [

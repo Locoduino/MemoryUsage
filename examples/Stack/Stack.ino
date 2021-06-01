@@ -15,9 +15,30 @@ void subPointer(rhaaa *apSample);
 void subSmartPointer(rhaaa &aSample);
 void subConstSmartPointer(const rhaaa &aSample);
 
+inline void reportMemoryInfo(void)
+{
+    STACK_COMPUTE
+
+    MEMORY_PRINT_START
+    MEMORY_PRINT_HEAPSTART
+    MEMORY_PRINT_HEAPEND
+    MEMORY_PRINT_STACKSTART
+    MEMORY_PRINT_END
+    MEMORY_PRINT_STACKSIZE
+
+    STACK_PRINT
+
+    STACKPAINT_PRINT
+    Serial.println();
+}
+
 void setup() 
 {
     Serial.begin(115200);
+    Serial.println(F( "Running " __FILE__ ", Built " __DATE__));
+
+    reportMemoryInfo();
+    //STACK_COMPUTE
     
     // An instance of the sample is declared, and the string is filled with
     // some string to see how to access to it inside functions !
@@ -31,14 +52,15 @@ void setup()
     Serial.println(F("Starting state of the memory:"));
     Serial.println();
     
-    MEMORY_PRINT_START
-    MEMORY_PRINT_HEAPSTART
-    MEMORY_PRINT_HEAPEND
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
+    reportMemoryInfo();
+    //MEMORY_PRINT_START
+    //MEMORY_PRINT_HEAPSTART
+    //MEMORY_PRINT_HEAPEND
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
 
-    STACKPAINT_PRINT
+    //STACKPAINT_PRINT
 
     Serial.println();
     Serial.println();
@@ -68,7 +90,7 @@ void setup()
     // No data as argument, nut a nig array of doubles inside the function...
     subLocalData();
    
-    STACKPAINT_PRINT
+    //STACKPAINT_PRINT
 
     Serial.println();
     Serial.println();
@@ -76,12 +98,16 @@ void setup()
     Serial.println(F("Ending state of the memory:"));
     Serial.println();
     
-    MEMORY_PRINT_START
-    MEMORY_PRINT_HEAPSTART
-    MEMORY_PRINT_HEAPEND
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
+    reportMemoryInfo();
+    //MEMORY_PRINT_START
+    //MEMORY_PRINT_HEAPSTART
+    //MEMORY_PRINT_HEAPEND
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+
+    Serial.print(F("num STACK_COMPUTE calls: "));
+    Serial.println(numStackComputeCalls);
 
     Serial.println();
     Serial.println();
@@ -91,10 +117,11 @@ void subFull(rhaaa aSample)
 {
     Serial.println("subFull");
     Serial.println(aSample.text);
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
-    STACK_PRINT
+    reportMemoryInfo();
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+    //STACK_PRINT
     Serial.println();
 }
 
@@ -102,10 +129,11 @@ void subPointer(rhaaa *apSample)
 {
     Serial.println("subPointer");
     Serial.println(apSample->text);
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
-    STACK_PRINT
+    reportMemoryInfo();
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+    //STACK_PRINT
     Serial.println();
 }
 
@@ -113,10 +141,11 @@ void subSmartPointer(rhaaa &aSample)
 {
     Serial.println("subSmartPointer");
     Serial.println(aSample.text);
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
-    STACK_PRINT
+    reportMemoryInfo();
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+    //STACK_PRINT
     Serial.println();
 }
 
@@ -124,10 +153,11 @@ void subConstSmartPointer(const rhaaa &aSample)
 {
     Serial.println("subConstSmartPointer");
     Serial.println(aSample.text);
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
-    STACK_PRINT
+    reportMemoryInfo();
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+    //STACK_PRINT
     Serial.println();
 }
 
@@ -141,10 +171,11 @@ void subLocalData()
         v[i] = (double)i;
     
     Serial.println(v[10]);
-    MEMORY_PRINT_STACKSTART
-    MEMORY_PRINT_END
-    MEMORY_PRINT_STACKSIZE
-    STACK_PRINT
+    reportMemoryInfo();
+    //MEMORY_PRINT_STACKSTART
+    //MEMORY_PRINT_END
+    //MEMORY_PRINT_STACKSIZE
+    //STACK_PRINT
     Serial.println();
 }
 
@@ -152,3 +183,4 @@ void loop()
 {
 
 }
+

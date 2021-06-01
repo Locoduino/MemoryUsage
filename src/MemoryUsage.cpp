@@ -68,6 +68,8 @@ void mu_StackPaint(void)
 #endif
 }
 
+int numStackComputeCalls = 0;
+
 /// Checks the first undecorated byte.
 uint16_t mu_StackCount(void)
 {

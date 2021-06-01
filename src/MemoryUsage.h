@@ -114,6 +114,9 @@ extern uint8_t *__heap_end;
 extern uint8_t *__bss_start;
 extern uint8_t *__bss_end;
 
+extern int numStackComputeCalls;
+extern int mu_stack_size;
+
 //
 // Memory addresses
 //
@@ -146,10 +149,27 @@ void SRamDisplay(void);
 //
 
 /// Must be used only one time, outside any function.
-#define STACK_DECLARE      unsigned int mu_stack_size = (RAMEND - SP);
+#define STACK_DECLARE      int mu_stack_size = ((int) RAMEND - (int) SP);
 
 /// Must be called to update the current maximum size of the stack, at each function beginning.
-#define STACK_COMPUTE      { mu_stack_size = (RAMEND - SP) > mu_stack_size ? (RAMEND - SP) : mu_stack_size;}
+//#define STACK_COMPUTE      { mu_stack_size = (RAMEND - SP) > mu_stack_size ? (RAMEND - SP) : mu_stack_size;}
+inline void stackCompute(void) {
+    //int currentStack = (int) SP;
+    char topOfStack = ' ';	// declared var @ top of stack
+    int currentStack = (int) &topOfStack;
+    int currentSize = (int) RAMEND - currentStack;
+    //mu_stack_size = (currentSize > mu_stack_size)
+    //          ? currentSize
+    //          : mu_stack_size;
+    mu_stack_size = max(currentSize, mu_stack_size);
+    numStackComputeCalls++;
+    Serial.println(F("COMPUTING STACK..."));
+    Serial.print(F("Current stack: "));
+    Serial.println(currentStack);
+    Serial.print(F("Current SP macro: "));
+    Serial.println(SP);
+}
+#define STACK_COMPUTE      stackCompute();
 
 /// Compute the current maximum and show it now with customized text.
 #define STACK_PRINT_TEXT(text)  { STACK_COMPUTE; Serial.print(text);  Serial.println(mu_stack_size); }

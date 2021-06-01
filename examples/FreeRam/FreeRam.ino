@@ -3,6 +3,7 @@
 void setup() 
 {
     Serial.begin(115200);
+    Serial.println(F( "Running " __FILE__ ", Built " __DATE__));
     Serial.println(F("Starting state of the memory:"));
     Serial.println();
     
@@ -37,9 +38,13 @@ void setup()
     Serial.println();
     
     FREERAM_PRINT;
+
+    Serial.print(F("num STACK_COMPUTE calls: "));
+    Serial.println(numStackComputeCalls);
 }
 
 void loop() 
 {
 
 }
+

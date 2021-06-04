@@ -120,26 +120,93 @@ extern int mu_stack_size;
 //
 // Memory addresses
 //
+namespace MU {
+    // start of RAM:
+    // ... initialized data
+    // ... then bss (uninitialized data)
+    // ... then heap
+    // ... then FREE RAM
+    // ... then stack
+    // ... then end of RAM
+
+    inline unsigned int getDataStart(void)
+    {
+	return (unsigned int) &__data_start; // start RAM
+    }
+
+    inline unsigned int getHeapStart(void)
+    {
+	return (unsigned int) &__heap_start;
+    }
+
+    inline unsigned int getHeapEnd(void)
+    {
+	unsigned int heapEnd = getHeapStart();
+	if (__brkval)
+		heapEnd = (unsigned int)__brkval;
+	return heapEnd;
+    }
+
+    inline unsigned int getHeapSize(void)
+    {
+	return getHeapEnd() - getHeapStart();
+    }
+
+    inline unsigned int getStackStart(void)
+    {
+	// next UNUSED entry
+	// active stack above here. Stack grows DOWN from RAMEND
+	return (unsigned int) SP;
+    }
+
+    inline unsigned int getFreeRam(void)
+    {
+	return getStackStart() - getHeapEnd();
+    }
+
+    inline unsigned int getMemoryEnd(void)
+    {
+	return (unsigned int) RAMEND; // last byte! (not the byte after)
+    }
+
+    inline unsigned int getStackSize(void)
+    {
+	return getMemoryEnd() - getStackStart();
+    }
+
+    inline unsigned int getMaxStackSize(void)
+    {
+	return mu_stack_size;
+    }
+
+    inline unsigned int getRamSize(void)
+    {
+	return (getMemoryEnd() + 1) - getDataStart();
+    }
+}; // end namespace MU
+
+#define MU_PRINT(txt, value) {Serial.print((txt)); Serial.println((value));}
 
 /// Print data start on serial console.
-#define MEMORY_PRINT_START		{ Serial.print(F("Data start:")); Serial.println((int) &__data_start); }
+#define MEMORY_PRINT_START MU_PRINT(F("Data start:"), MU::getDataStart())
 /// Print data end / heap start on serial console.
-#define MEMORY_PRINT_HEAPSTART	{ Serial.print(F("Heap start:")); Serial.println((int)&__heap_start); }
+#define MEMORY_PRINT_HEAPSTART MU_PRINT(F("Heap start:"), MU::getHeapStart())
 /// Print heap end / free ram area on serial console.
-#define MEMORY_PRINT_HEAPEND	{ Serial.print(F("Heap end:")); Serial.println(__brkval == 0 ? (int)&__heap_start : (int)__brkval); }
+#define MEMORY_PRINT_HEAPEND MU_PRINT(F("Heap end:"), MU::getHeapEnd())
 /// Print free ram end / stack start on serial console.
-#define MEMORY_PRINT_STACKSTART	{ Serial.print(F("Stack start:")); Serial.println((int) SP); }
+#define MEMORY_PRINT_STACKSTART MU_PRINT(F("Stack start:"), MU::getStackStart())
 /// Print end of memory on serial console.
-#define MEMORY_PRINT_END		{ Serial.print(F("Stack end:")); Serial.println((int) RAMEND); }
+#define MEMORY_PRINT_END MU_PRINT(F("Stack end:"), MU::getMemoryEnd())
 
 /// Print heap size on serial console.
-#define MEMORY_PRINT_HEAPSIZE	{ Serial.print(F("Heap size:")); Serial.println((int) (__brkval == 0 ? (int)&__heap_start : (int)__brkval) - (int)&__heap_start); }
+#define MEMORY_PRINT_HEAPSIZE MU_PRINT(F("Heap size:"),MU::getHeapSize())
 /// Print stack size on serial console.
-#define MEMORY_PRINT_STACKSIZE	{ Serial.print(F("Stack size:")); Serial.println((int) RAMEND - (int)SP); }
+#define MEMORY_PRINT_STACKSIZE  MU_PRINT(F("Stack size:"),MU::getStackSize())
 /// Print free ram size on serial console.
-#define MEMORY_PRINT_FREERAM	{ Serial.print(F("Free ram:")); Serial.println((int) SP - (int) (__brkval == 0 ? (int)&__heap_start : (int)__brkval)); }
+#define MEMORY_PRINT_FREERAM MU_PRINT(F("Free ram:"),; MU::getFreeRam())
 /// Print total SRAM size on serial console.
-#define MEMORY_PRINT_TOTALSIZE	{ Serial.print(F("SRAM size:")); Serial.println((int) RAMEND - (int) &__data_start); }
+#define MEMORY_PRINT_TOTALSIZE MU_PRINT(F("SRAM size:"),MU::getRamSize())
+
 
 /// Displays the 'map' of the current state of the Arduino's SRAM memory on the Serial console.
 void SRamDisplay(void);
@@ -154,20 +221,11 @@ void SRamDisplay(void);
 /// Must be called to update the current maximum size of the stack, at each function beginning.
 //#define STACK_COMPUTE      { mu_stack_size = (RAMEND - SP) > mu_stack_size ? (RAMEND - SP) : mu_stack_size;}
 inline void stackCompute(void) {
-    //int currentStack = (int) SP;
-    char topOfStack = ' ';	// declared var @ top of stack
-    int currentStack = (int) &topOfStack;
+    int currentStack = (int) SP;
     int currentSize = (int) RAMEND - currentStack;
-    //mu_stack_size = (currentSize > mu_stack_size)
-    //          ? currentSize
-    //          : mu_stack_size;
     mu_stack_size = max(currentSize, mu_stack_size);
     numStackComputeCalls++;
-    Serial.println(F("COMPUTING STACK..."));
-    Serial.print(F("Current stack: "));
-    Serial.println(currentStack);
-    Serial.print(F("Current SP macro: "));
-    Serial.println(SP);
+    //Serial.println(F("COMPUTING STACK..."));
 }
 #define STACK_COMPUTE      stackCompute();
 
@@ -198,10 +256,6 @@ int mu_freeRam(void);
 uint16_t mu_StackCount(void);
 
 /// Compute the current maximum and show it now with customized text.
-#define STACKPAINT_PRINT_TEXT(text)  { Serial.print(text);  Serial.println(mu_StackCount()); }
-
-/// Compute the current maximum and show it now with default text.
-#define STACKPAINT_PRINT        STACKPAINT_PRINT_TEXT(F("Stack Maximum Size (Painting method): "));
-
+#define STACKPAINT_PRINT MU_PRINT(F("Stack Maximum Size (Painting method):"),mu_StackCount())
 
 #endif

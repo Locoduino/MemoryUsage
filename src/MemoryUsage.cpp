@@ -75,7 +75,7 @@ uint16_t mu_StackCount(void)
 {
 	uint8_t *p = (__brkval == 0 ? (uint8_t *) &__heap_start : __brkval);
 
-	while (*p == STACK_CANARY && (int) p <= SP)
+	while (*p == STACK_CANARY &&  p <= (uint8_t *) SP)
 		p++;
 
 	return (uint16_t)RAMEND - (uint16_t)p;

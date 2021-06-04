@@ -1,5 +1,17 @@
 #include <MemoryUsage.h>
 
+byte * p = 0;
+
+
+int updateStack(void)
+{
+    char volatile stuff[] = "updating stack!";
+    stuff[0] = 'U';
+    Serial.println((char *) stuff);
+    FREERAM_PRINT
+    return MU::getFreeRam();
+}
+
 void setup() 
 {
     Serial.begin(115200);
@@ -14,12 +26,19 @@ void setup()
     MEMORY_PRINT_END
     MEMORY_PRINT_HEAPSIZE
 
+    updateStack();
+    
     Serial.println();
     Serial.println();
    
     FREERAM_PRINT;
 
-    byte *p = new byte[3000];    
+    //byte *p = new byte[3000];
+    byte *p = new byte[300];  // Uno (ATmega328) only has 2k RAM
+
+    if(!p) {
+        Serial.println(F("could not allocate bytes for p[] array!"));
+    }
     
     Serial.println();
     Serial.println();
@@ -41,10 +60,12 @@ void setup()
 
     Serial.print(F("num STACK_COMPUTE calls: "));
     Serial.println(numStackComputeCalls);
+
+    delete p;
+    p = 0;
 }
 
 void loop() 
 {
 
 }
-

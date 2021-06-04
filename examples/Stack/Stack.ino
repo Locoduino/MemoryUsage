@@ -53,14 +53,6 @@ void setup()
     Serial.println();
     
     reportMemoryInfo();
-    //MEMORY_PRINT_START
-    //MEMORY_PRINT_HEAPSTART
-    //MEMORY_PRINT_HEAPEND
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-
-    //STACKPAINT_PRINT
 
     Serial.println();
     Serial.println();
@@ -99,12 +91,6 @@ void setup()
     Serial.println();
     
     reportMemoryInfo();
-    //MEMORY_PRINT_START
-    //MEMORY_PRINT_HEAPSTART
-    //MEMORY_PRINT_HEAPEND
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
 
     Serial.print(F("num STACK_COMPUTE calls: "));
     Serial.println(numStackComputeCalls);
@@ -118,10 +104,6 @@ void subFull(rhaaa aSample)
     Serial.println("subFull");
     Serial.println(aSample.text);
     reportMemoryInfo();
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-    //STACK_PRINT
     Serial.println();
 }
 
@@ -130,10 +112,6 @@ void subPointer(rhaaa *apSample)
     Serial.println("subPointer");
     Serial.println(apSample->text);
     reportMemoryInfo();
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-    //STACK_PRINT
     Serial.println();
 }
 
@@ -142,10 +120,6 @@ void subSmartPointer(rhaaa &aSample)
     Serial.println("subSmartPointer");
     Serial.println(aSample.text);
     reportMemoryInfo();
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-    //STACK_PRINT
     Serial.println();
 }
 
@@ -154,10 +128,6 @@ void subConstSmartPointer(const rhaaa &aSample)
     Serial.println("subConstSmartPointer");
     Serial.println(aSample.text);
     reportMemoryInfo();
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-    //STACK_PRINT
     Serial.println();
 }
 
@@ -172,10 +142,6 @@ void subLocalData()
     
     Serial.println(v[10]);
     reportMemoryInfo();
-    //MEMORY_PRINT_STACKSTART
-    //MEMORY_PRINT_END
-    //MEMORY_PRINT_STACKSIZE
-    //STACK_PRINT
     Serial.println();
 }
 

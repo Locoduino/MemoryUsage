@@ -136,7 +136,7 @@ extern uint8_t *__bss_end;
 /// Print free ram size on serial console.
 #define MEMORY_PRINT_FREERAM	{ Serial.print(F("Free ram:")); Serial.println((int) SP - (int) (__brkval == 0 ? (int)&__heap_start : (int)__brkval)); }
 /// Print total SRAM size on serial console.
-#define MEMORY_PRINT_TOTALSIZE	{ Serial.print(F("SRAM size:")); Serial.println((int) RAMEND - (int) &__data_start); }
+#define MEMORY_PRINT_TOTALSIZE	{ Serial.print(F("SRAM size:")); Serial.println(((int) RAMEND + 1 - (int) &__data_start)); }
 
 /// Displays the 'map' of the current state of the Arduino's SRAM memory on the Serial console.
 void SRamDisplay(void);

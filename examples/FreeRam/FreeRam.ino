@@ -3,6 +3,7 @@
 void setup() 
 {
     Serial.begin(115200);
+    Serial.println(F( "Running " __FILE__ ", Built " __DATE__));
     Serial.println(F("Starting state of the memory:"));
     Serial.println();
     
@@ -17,9 +18,14 @@ void setup()
     Serial.println();
    
     FREERAM_PRINT;
+ 
+    //byte *p = new byte[3000];
+    byte *p = new byte[300];  // Uno (ATmega328) only has 2k RAM
 
-    byte *p = new byte[3000];    
-    
+    if(!p) {
+        Serial.println(F("could not allocate bytes for p[] array!"));
+    }
+        
     Serial.println();
     Serial.println();
     
@@ -37,6 +43,9 @@ void setup()
     Serial.println();
     
     FREERAM_PRINT;
+
+    delete p;
+    p = 0;
 }
 
 void loop() 

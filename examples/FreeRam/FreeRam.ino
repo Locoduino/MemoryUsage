@@ -32,7 +32,7 @@ void setup()
     Serial.println();
    
     FREERAM_PRINT;
-
+ 
     //byte *p = new byte[3000];
     byte *p = new byte[300];  // Uno (ATmega328) only has 2k RAM
 

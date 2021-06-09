@@ -68,12 +68,14 @@ void mu_StackPaint(void)
 #endif
 }
 
+int numStackComputeCalls = 0;
+
 /// Checks the first undecorated byte.
 uint16_t mu_StackCount(void)
 {
 	uint8_t *p = (__brkval == 0 ? (uint8_t *) &__heap_start : __brkval);
 
-	while (*p == STACK_CANARY && (int) p <= SP)
+	while (*p == STACK_CANARY &&  p <= (uint8_t *) SP)
 		p++;
 
 	return (uint16_t)RAMEND - (uint16_t)p;
@@ -92,23 +94,23 @@ void SRamDisplay(void)
 	
 	available	-=	data_size + bss_size + heap_size + stack_size;
 
-	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_start);	Serial.println(" (__data_start)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_start);	Serial.println(F(" (__data_start)"));
 	Serial.print(F("+      data      +"));			Serial.println();
 	Serial.print(F("+    variables   + size = "));	Serial.println(data_size);
-	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_end);		Serial.println(" (__data_end / __bss_start)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__data_end);		Serial.println(F(" (__data_end / __bss_start)"));
 	Serial.print(F("+      bss       +"));			Serial.println();
 	Serial.print(F("+    variables   + size = "));	Serial.println(bss_size);
-	Serial.print(F("+----------------+ "));			Serial.print((int)&__bss_end);		Serial.println(" (__bss_end / __heap_start)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)&__bss_end);		Serial.println(F(" (__bss_end / __heap_start)"));
 	Serial.print(F("+      heap      + size = "));	Serial.println(heap_size);
-	Serial.print(F("+----------------+ "));			Serial.print((int)heap_end);		Serial.println(" (__brkval if not 0, or __heap_start)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)heap_end);		Serial.println(F(" (__brkval if not 0, or __heap_start)"));
 	Serial.print(F("+                +"));			Serial.println();
 	Serial.print(F("+                +"));			Serial.println();
 	Serial.print(F("+   FREE RAM     + size = "));	Serial.println(available);
 	Serial.print(F("+                +"));			Serial.println();
 	Serial.print(F("+                +"));			Serial.println();
-	Serial.print(F("+----------------+ "));			Serial.print((int)SP);		Serial.println(" (SP)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)SP);		Serial.println(F(" (SP)"));
 	Serial.print(F("+     stack      + size = "));	Serial.println(stack_size);
-	Serial.print(F("+----------------+ "));			Serial.print((int)RAMEND);		Serial.println(" (RAMEND / __stack)");
+	Serial.print(F("+----------------+ "));			Serial.print((int)RAMEND);		Serial.println(F(" (RAMEND / __stack)"));
 
 	Serial.println();
 	Serial.println();
